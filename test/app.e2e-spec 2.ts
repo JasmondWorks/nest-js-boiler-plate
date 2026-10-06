@@ -1,11 +1,11 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
-import { AppModule } from '../src/app.module';
+import { App } from 'supertest/types';
+import { AppModule } from './../src/app.module.js';
 
-describe('AppModule (e2e)', () => {
-  let app: INestApplication;
+describe('AppController (e2e)', () => {
+  let app: INestApplication<App>;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -16,8 +16,11 @@ describe('AppModule (e2e)', () => {
     await app.init();
   });
 
-  it('should compile application module', () => {
-    expect(app).toBeDefined();
+  it('/ (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/')
+      .expect(200)
+      .expect('Hello World!');
   });
 
   afterEach(async () => {
