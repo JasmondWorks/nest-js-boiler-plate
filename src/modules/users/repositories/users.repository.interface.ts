@@ -1,5 +1,6 @@
 import { User } from '../types/user.entity';
 import { UserRole } from '../types/user-role.enum';
+import { PaginatedResult } from '@/common/interfaces/paginated-result.interface';
 
 export const USERS_REPOSITORY = Symbol('USERS_REPOSITORY');
 
@@ -20,11 +21,6 @@ export interface FindUsersParams {
     limit: number;
     search?: string;
     role?: UserRole;
-}
-
-export interface PaginatedResult<T> {
-    items: T[];
-    total: number;
 }
 
 export interface UsersRepository {
