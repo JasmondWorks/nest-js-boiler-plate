@@ -6,10 +6,10 @@ import { UserRole } from '../types/user-role.enum';
 import {
     CreateUserData,
     FindUsersParams,
-    PaginatedResult,
     UpdateUserData,
     UsersRepository,
 } from './users.repository.interface';
+import { PaginatedResult } from '@/common/interfaces/paginated-result.interface';
 
 @Injectable()
 export class PrismaUsersRepository implements UsersRepository {
