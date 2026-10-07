@@ -1,9 +1,5 @@
-import {
-  ConflictException,
-  Inject,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { ResourceConflictException } from '@/common/exceptions/app.exception';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -65,7 +61,7 @@ export class UsersService {
   private async assertEmailAvailable(email: string): Promise<void> {
     const taken = await this.usersRepo.findByEmail(email);
     if (taken) {
-      throw new ConflictException('A user with this email already exists');
+      throw new ResourceConflictException('A user with this email already exists');
     }
   }
 }
